@@ -1,26 +1,26 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <use-editor v-if='visiable' :visiable='visiable'/>
+    <use-editor v-if='editorVisiable' :visiable.sync='editorVisiable'/>
     <button v-else @click="showDialog">显示弹框</button>
   </div>
 </template>
 
 <script>
-import useEditor from "../src/editorDemo/useEditor";
+import useEditor from '../src/editorDemo/useEditor';
 export default {
-  name: "App",
+  name: 'App',
   components: {
     useEditor: useEditor,
   },
   data(){
     return{
-      visiable:false
-    }
+      editorVisiable:false
+    };
   },
   methods:{
     showDialog(){
-      this.visiable = true
+      this.editorVisiable = true;
     }
   }
 };

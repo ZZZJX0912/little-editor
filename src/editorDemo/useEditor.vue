@@ -5,10 +5,10 @@
     :show-close="false"
     width="550px"
   >
-    <el-form ref="messageTemplateForm" :rules="rules" :model="formData" label-width="80px">
+    <el-form ref="messageTemplateForm" :rules="rules" :model="formData" label-width="100px">
 
       <!-- TODO: 编辑框 -->
-      <el-form-item ref="messageFormItem" label="短信内容" prop='editorValue'>
+      <el-form-item ref="messageFormItem" label="富文本内容" prop='editorValue'>
         <editor
           class="editor"
           v-model="formData.editorValue"
@@ -30,8 +30,9 @@
 </template>
 
 <script>
-import Editor from './editor.vue'
-import { Message } from 'element-ui'
+import Editor from './editor.vue';
+import { v4 as uuidv4 } from 'uuid';
+import { Message } from 'element-ui';
 export default {
   components: {
     Editor
@@ -42,7 +43,7 @@ export default {
       default: false
     }
   },
-  data () {
+  data() {
     return {
       // 表单数据
       formData: {},
@@ -58,34 +59,41 @@ export default {
         editorValue: { required: true, message: '请输入富文本内容', trigger: 'blur' },
         somethingElse: { required: true, message: '请输入其他东西', trigger: 'blur' }
       }
-    }
+    };
   },
-  mounted () {
-    this.formData = JSON.parse(JSON.stringify(this.defalutForm))
-    this.queryVariableList()
+  mounted() {
+    this.formData = JSON.parse(JSON.stringify(this.defalutForm));
+    this.queryVariableList();
   },
   methods: {
-    async queryVariableList () {
+    async queryVariableList() {
       this.variableList = [
-        '富文本',
-        'little-editor'
-      ]
+        {
+          variableId:uuidv4(),
+          variableName:'富文本'
+        },
+        {
+          variableId:uuidv4(),
+          variableName:'little-editor'
+        },
+      ];
     },
     // dialog 确认按钮事件
-    commitForm () {
-      Message('别点啦，这只是个demo')
-      this.dialogBeforeClose()
+    commitForm() {
+      Message('别点啦，这只是个demo');
+      this.dialogBeforeClose();
     },
     // 关闭弹窗
-    dialogBeforeClose () {
-      this.$emit('update:visiable', false)
+    dialogBeforeClose() {
+      this.$refs.messageTemplateForm.clearValidate();
+      this.$emit('update:visiable', false);
     },
-    handleBlur (e) {
-      this.$refs.messageFormItem.$emit('el.form.blur', e)
+    handleBlur(e) {
+      this.$refs.messageFormItem.$emit('el.form.blur', e);
     }
   }
 
-}
+};
 </script>
 
 <style lang='scss' scope>
