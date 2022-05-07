@@ -17,9 +17,9 @@ module.exports = {
     globalThis: true
   },
   // 继承prettier、eslint推荐配置
-  extends: ['eslint:recommended', 'prettier','plugin:vue/essential'],
+  extends: ['eslint:recommended', 'prettier', 'plugin:vue/essential'],
   parser: 'vue-eslint-parser',
-  plugins: ['zero-config','html'],
+  plugins: ['zero-config', 'html'],
   rules: {
     'vue/no-mutating-props': 'off',
     // 关闭严格模式

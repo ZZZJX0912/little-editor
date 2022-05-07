@@ -1,7 +1,7 @@
-const webpackBaseConfig = require('./webpack.base')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const { merge } = require('webpack-merge')
+const webpackBaseConfig = require('./webpack.base');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { merge } = require('webpack-merge');
 
 
 const webpackProdConfig = {
@@ -26,6 +26,6 @@ const webpackProdConfig = {
       ]
     })
   ]
-}
+};
 
-module.exports = merge(webpackBaseConfig,webpackProdConfig)
+module.exports = merge(webpackBaseConfig, webpackProdConfig);

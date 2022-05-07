@@ -1,11 +1,11 @@
-const resolvePath = require('./pathManage')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const resolvePath = require('./pathManage');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry:'./src/main.js',
   //webpack解析规则
   resolve:{
-    //解析后缀名 
+    //解析后缀名
     extensions: ['.js', 'jsx', '.vue'],
     // 别名
     alias:{
@@ -63,27 +63,27 @@ module.exports = {
 
       //文件处理webpack4 写法
       // {
-        // test:/\.(png|svg|gif|jpe?g)$/,
-        // use:[
-        //   {
-        //     /**
-        //      * url-loader转base64,减少请求次数
-        //      * file-loader是静态文件按照规则拷贝到制定目录，分开请求
-        //      * url-loader内部通过limit规则可以调用file-loader
-        //      */
-        //     loader:'url-loader',
-        //     /**
-        //      * [ext]：扩展名
-        //      * [name]：文件名称
-        //      * [hash:<length>]：文件内容生成的哈希，length为截取的哈希长度
-        //      */
-        //     options:{
-        //       name:'img/[name].[hash:4].[ext]', 
-        //       limit:24 * 1024, //24kb  超过对应大小调用file-loader拷贝静态文件，否则转成base64
-        //       exModule:false // 不转成exModule，require文件时，无需.default取值
-        //     }
-        //   }
-        // ]
+      // test:/\.(png|svg|gif|jpe?g)$/,
+      // use:[
+      //   {
+      //     /**
+      //      * url-loader转base64,减少请求次数
+      //      * file-loader是静态文件按照规则拷贝到制定目录，分开请求
+      //      * url-loader内部通过limit规则可以调用file-loader
+      //      */
+      //     loader:'url-loader',
+      //     /**
+      //      * [ext]：扩展名
+      //      * [name]：文件名称
+      //      * [hash:<length>]：文件内容生成的哈希，length为截取的哈希长度
+      //      */
+      //     options:{
+      //       name:'img/[name].[hash:4].[ext]',
+      //       limit:24 * 1024, //24kb  超过对应大小调用file-loader拷贝静态文件，否则转成base64
+      //       exModule:false // 不转成exModule，require文件时，无需.default取值
+      //     }
+      //   }
+      // ]
       // },
 
 
@@ -117,7 +117,7 @@ module.exports = {
         exclude:/node_modules/,
         use:['babel-loader']
       },
-      
+
       //vue
       {
         test:/\.vue$/,
@@ -133,4 +133,4 @@ module.exports = {
       template:'./public/index.html'
     }),
   ]
-}
+};
