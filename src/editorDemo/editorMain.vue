@@ -1,7 +1,16 @@
 <template>
   <div class="editor_main">
+    <div id="editor_tool_bar">
+      <span
+        v-for="item in tool_list"
+        :key="item.key"
+        :title="item.title"
+        class="tool_item"
+        :class="item.className"
+        @click="item.event"
+      />
+    </div>
     <div id="editor_container" class="editor_container" contenteditable @blur="blur"></div>
-
     <div id="variable-list" class="variable-list">
       <div
         v-for="(variable,index) in variableList"
@@ -18,6 +27,7 @@
 </template>
 
 <script>
+import { v4 as uuidv4 } from 'uuid';
 export default {
   props: {
     // 变量列表
@@ -57,7 +67,8 @@ export default {
       matchFlag: false,
       // 匹配次数
       regTime: 0,
-      currentIndex: 0
+      currentIndex: 0,
+      tool_list:[]
     };
   },
   mounted() {
@@ -66,6 +77,26 @@ export default {
     document.body.addEventListener('keydown', this.handleKeydown);
     this.mutation();
     this.display(this.content);
+    this.tool_list = [
+      {
+        key:uuidv4(),
+        className:'iconfont icon-zitijiacu',
+        title:'加粗',
+        event:this.blod
+      },
+      {
+        key:uuidv4(),
+        className:'iconfont icon-zitixieti',
+        title:'斜体',
+        event:this.italic
+      },
+      {
+        key:uuidv4(),
+        className:'iconfont icon-zitixiahuaxian',
+        title:'下划线',
+        event:this.underLine
+      }
+    ];
   },
   methods: {
     display(val) {
@@ -236,8 +267,51 @@ export default {
           return true;
       }
       e.preventDefault();
-    }
+    },
 
+    //粗体
+    blod(){
+      console.log('加粗');
+      const selection = document.getSelection();
+      console.log(111, selection);
+      if(!selection) return;
+      const range = selection.getRangeAt(0);
+      console.log(123, range);
+      const insertNode = document.createElement('b');
+      insertNode.className = 'bolder';
+      insertNode.innerText = selection;
+      range.deleteContents();
+      range.insertNode(insertNode);
+    },
+
+
+    //斜体
+    italic(){
+      console.log('斜体');
+      const selection = document.getSelection();
+      if(!selection) return;
+      const range = selection.getRangeAt(0);
+      const insertNode = document.createElement('i');
+      insertNode.className = 'italic';
+      insertNode.innerText = selection;
+      range.deleteContents();
+      range.insertNode(insertNode);
+    },
+
+    //下划线
+    underLine(){
+      console.log('加粗');
+      const selection = document.getSelection();
+      console.log(111, selection);
+      if(!selection) return;
+      const range = selection.getRangeAt(0);
+      console.log(123, range);
+      const insertNode = document.createElement('u');
+      insertNode.className = 'bolder';
+      insertNode.innerText = selection;
+      range.deleteContents();
+      range.insertNode(insertNode);
+    }
   }
 };
 </script>
@@ -281,6 +355,12 @@ export default {
       background-color: #eee;
     }
   }
+}
+.tool_item{
+  box-shadow: 0px 0px 5px #888888;
+  border-radius: 2px;
+  user-select: none;
+  cursor: pointer;
 }
 
 </style>
